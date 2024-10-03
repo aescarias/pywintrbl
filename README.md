@@ -1,8 +1,11 @@
-# Python Install Tracer for Windows
+# Python on Windows Troubleshooter (pywintrbl)
+
+![The pywintrbl icon](./pywintrbl.ico)
+
+> [!warning]
+> Because this project is currently **experimental**, it provides **no way** of removing these traces. You will have to do this **manually** (or alternatively with third-party removal tools).
 
 This is a troubleshooting tool designed to look for traces of PythonCore (CPython/python.org) installations on Windows.
-
-**Because this project is currently experimental, it provides no way of removing these traces. You will have to do this manually (or alternatively with third-party removal tools).**
 
 ## Why?
 
@@ -13,6 +16,9 @@ It is common for users to reinstall or modify their existing Python installation
 - The installer fails with a "fatal error" with a reason only decipherable by reading the logs.
 
 ## How do I use it?
+
+> [!note]
+> As this is very recent software and not frequently downloaded, Microsoft SmartScreen/Defender and similar reputation-based engines may flag this file. You may decide to ignore these warnings or instead use `pywintrbl` as a package as outlined below.
 
 A precompiled binary for Windows is available for you to run in Releases. You will need to have the [Microsoft VC++ Redistributable](https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist?view=msvc-170#latest-microsoft-visual-c-redistributable-version) installed to be able to run the troubleshooter.
 

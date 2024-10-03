@@ -2,7 +2,7 @@ import winreg
 import os
 import pathlib
 from typing import Literal, Generator
-from .registry_helpers import list_keys, get_path_from_hkey, get_friendly_hkey_path, get_value
+from pywintrbl.registry_helpers import list_keys, get_path_from_hkey, get_friendly_hkey_path, get_value
 
 from rich.console import Console
 from rich.terminal_theme import DIMMED_MONOKAI
@@ -129,7 +129,6 @@ def main() -> None:
     local_32bit_entries = get_pep514_entries("HKLM", "32bit")
     local_64bit_entries = get_pep514_entries("HKLM", "64bit")
     
-    # table = Table("Display Name", "Hive", "Installation Path", "Registry Key", safe_box=True, box=None)
     for hive, entries in (
         ("User", user_entries),
         ("Machine (x86)", local_32bit_entries),
