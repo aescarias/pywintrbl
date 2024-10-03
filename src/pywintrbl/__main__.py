@@ -104,7 +104,7 @@ def get_path_entries() -> list[tuple[pathlib.Path, bool]]:
 
 def main() -> None:
     console = Console(record=True)
-    console.print("[cyan]Python Install Tracer v0.1[/cyan]", justify="center")
+    console.print("[cyan]Python on Windows Troubleshooter v0.1[/cyan]", justify="center")
 
     console.print("[yellow]Install Entries from 'Python Software Foundation'[/yellow]", justify="center")
 

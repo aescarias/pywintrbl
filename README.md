@@ -35,7 +35,7 @@ py -m pywintrbl
 
 ## How does this work?
 
-Python Install Tracer scans multiple common locations where Python and its install files are created. It also checks the Windows registry for signs of an installation on your device.
+``pywintrbl`` scans multiple common locations where Python and its install files are created. It also checks the Windows registry for signs of an installation on your device.
 
 ### Locations scanned
 
