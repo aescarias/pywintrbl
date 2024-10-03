@@ -1,0 +1,35 @@
+[project]
+name = "pywintrbl"
+description = "Check for traces of Python on a Windows system"
+authors = [
+    { name = "Angel Carias" }
+]
+readme = "README.md"
+license = {file = "LICENSE"}
+requires-python = ">=3.8"
+classifiers = [
+    "Intended Audience :: Developers",
+    "Operating System :: Microsoft :: Windows",
+    "License :: OSI Approved :: MIT License",
+    "Topic :: Software Development",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12"
+]
+dynamic = ["version"]
+dependencies = ["rich"]
+
+[project.urls]
+homepage = "https://github.com/aescarias/pywintrbl"
+
+[project.scripts]
+pywintrbl = "pywintrbl.__main__:main"
+
+[tool.setuptools.dynamic]
+version = { attr = "pywintrbl.__version__" }
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
