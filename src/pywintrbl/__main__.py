@@ -17,7 +17,7 @@ from rich.terminal_theme import DIMMED_MONOKAI
 
 def hkey_users_to_hkcu(hkey: str) -> str:
     """Converts an HKEY_USERS entry to HKEY_CURRENT_USER removing the user's SID.
-    
+
     This function assumes the SID is for the current user. In pywintrbl's case,
     it's always for the current user."""
     parts = hkey.split("\\")
@@ -27,9 +27,19 @@ def hkey_users_to_hkcu(hkey: str) -> str:
     return "\\".join(["HKEY_CURRENT_USER", *parts[2:]])
 
 
+def format_exists(path: str | None) -> str:
+    """Returns a string indicating whether ``path`` exists."""
+    if path and os.path.exists(path):
+        return "([green]path exists[/green])"
+    elif path:
+        return "([red]path does not exist[/red])"
+    else:
+        return ""
+
+
 def get_psf_uninstall_entries(
     key: Literal["HKLM", "HKCU"], wow64: Literal["32bit", "64bit"] = "64bit"
-) -> Generator[tuple[str, str, str], None, None]:
+) -> Generator[tuple[str, str | None, str], None, None]:
     """Retrieves all uninstall entries with 'Python Software Foundation' as their publisher.
 
     ``key`` must be either 'HKLM' (HKEY_LOCAL_MACHINE) or 'HKCU' (HKEY_CURRENT_USER).
@@ -195,8 +205,10 @@ def main() -> None:
         ("Machine (x64)", local_64bit_entries),
     ):
         for display_name, source, regkey in entries:
+            source_exists = format_exists(source)
+
             console.print(f"[magenta]{hive}[/magenta]: [cyan]{display_name}[/cyan]")
-            console.print(f"[bold]Installed at[/bold]: {source}")
+            console.print(f"[bold]Installed at[/bold]: {source} {source_exists}")
             console.print(f"[bold]Registry Key[/bold]: {regkey}")
             console.print()
 
@@ -233,9 +245,12 @@ def main() -> None:
             for display_name, install_location, regkey in entries:
                 fmt_display_name = display_name or "[red]Unspecified[/red]"
                 fmt_install_location = install_location or "[red]Unspecified[/red]"
+                location_exists = format_exists(install_location)
 
                 console.print(f"[magenta]{hive}[/magenta]: {fmt_display_name}")
-                console.print(f"[bold]Installed At[/bold]: {fmt_install_location}")
+                console.print(
+                    f"[bold]Installed At[/bold]: {fmt_install_location} {location_exists}"
+                )
                 console.print(f"[bold]Registry Key[/bold]: {regkey}")
                 console.print()
         except FileNotFoundError:
